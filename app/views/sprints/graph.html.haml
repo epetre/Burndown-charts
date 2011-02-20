@@ -1,0 +1,84 @@
+#content
+  :javascript
+    $(document).ready(function(){
+      
+      chart = new Highcharts.Chart({
+        chart: {
+           width: 500,
+           renderTo: 'chartcontainer',
+           defaultSeriesType: 'line',
+           marginRight: 130,
+           marginBottom: 25
+        },
+        title: {
+           text: '#{@sprint.name}',
+           x: -20 //center
+        },
+        subtitle: {
+           text: '#{@sprint.start_date}',
+           x: -20
+        },
+        xAxis: {
+           categories: #{@sprint.days}
+        },
+        yAxis: {
+           title: {
+              text: 'Points'
+           },
+           plotLines: [{
+              value: 0,
+              width: 1,
+              color: '#808080'
+           }]
+        },
+        tooltip: {
+           formatter: function() {
+                     return '<b>'+ this.series.name + '</b><br/>' + this.x + ': ' + this.y;
+           }
+        },
+        legend: {
+           layout: 'vertical',
+           align: 'right',
+           verticalAlign: 'top',
+           x: -10,
+           y: 100,
+           borderWidth: 0
+        },
+        plotOptions: {
+          area: {
+            fillColor: {
+              linearGradient: [0, 0, 0, 300],
+              stops: [
+                [0, Highcharts.theme.colors[0]],
+                [1, 'rgba(2,0,0,0)']
+              ]
+            },
+            lineWidth: 1,
+            marker: {
+              enabled: false,
+              states: {
+                hover: {
+                  enabled: true,
+                  radius: 5
+                }
+              }
+            },
+            shadow: false,
+            states: {
+              hover: {
+                lineWidth: 1            
+              }
+            }
+          }
+        },
+        series: [{
+           name: 'Series',
+           data: [18.2, 14.5, 9.5, 7.0, 6.9]
+        }]
+      });
+    });
+  .left.column
+    %h2= @sprint.name
+    %p Wazaa wazaa
+  .right.column
+    #chartcontainer.test

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MyBurnDownCharts</title>
+  <%= stylesheet_link_tag :all %>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <%= javascript_include_tag 'highcharts' %>
+  <%= javascript_include_tag './themes/dark-blue' %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

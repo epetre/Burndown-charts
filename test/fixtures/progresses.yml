@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  description: MyString
+  points: 1
+  apply_date: 2010-12-06
+
+two:
+  description: MyString
+  points: 1
+  apply_date: 2010-12-06
