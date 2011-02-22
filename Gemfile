@@ -12,6 +12,10 @@ gem 'haml'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.5"
+  gem "webrat"
+  gem 'ZenTest', '~> 4.5'
+  gem "autotest-rails", "~> 4.1.0"
+  gem 'test_notifier'
 end
 # Use unicorn as the web server
 # gem 'unicorn'
