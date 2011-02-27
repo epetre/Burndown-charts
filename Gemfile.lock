@@ -83,6 +83,7 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.5.0)
+    spork (0.8.4)
     sqlite3-ruby (1.3.2-x86-mingw32)
     test_notifier (0.3.6)
       notifier
@@ -106,6 +107,7 @@ DEPENDENCIES
   mongrel (>= 1.2.0.pre2)
   rails (= 3.0.4)
   rspec-rails (~> 2.5)
+  spork
   sqlite3-ruby
   test_notifier
   webrat

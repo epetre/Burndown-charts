@@ -28,10 +28,33 @@ describe Sprint do
     Sprint.new(:total_points => -2).should have(1).error_on(:total_points)
   end
   
-  
-  it "should return the first element in days as the start date" do
-    sprint = Sprint.new(:start_date => Date.new)
-    sprint.days.first.should eq(sprint.start_date)
+  it "fails validation when name is not specified" do
+    Sprint.new(:start_date => Date.new, :total_points => 25).should have(1).error_on(:name)
   end
   
+  it "passes validation when name is specified" do
+    Sprint.new(:start_date => Date.new, :total_points => 25, :name => 'nom').should have(0).error_on(:name)
+  end
+  
+  
+  it "fails validation when duration is not specified" do
+    Sprint.new(:start_date => Date.new, :total_points => 25).should have(2).error_on(:duration)
+  end
+  
+  it "passes validation when duration is specified" do
+    Sprint.new(:start_date => Date.new, :total_points => 25, :duration => 10).should have(0).error_on(:duration)
+  end
+  
+  it "should return the first element in days as the start date" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 5)
+    sprint.days.first.should eq(sprint.start_date)
+  end
+  it "should return x day including start_date, where x is the duration specified" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 10)
+    sprint.days.first.should eq(sprint.start_date)
+    
+    expected = (1..10).to_a.collect{ |x| sprint.start_date + (x - 1).day }
+    
+    sprint.days.should eq(expected)
+  end
 end

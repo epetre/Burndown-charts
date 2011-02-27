@@ -16,6 +16,7 @@ group :test, :development do
   gem 'ZenTest', '~> 4.5'
   gem "autotest-rails", "~> 4.1.0"
   gem 'test_notifier'
+  gem 'spork'
 end
 # Use unicorn as the web server
 # gem 'unicorn'
