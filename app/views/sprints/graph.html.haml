@@ -4,11 +4,13 @@
       
       chart = new Highcharts.Chart({
         chart: {
-           width: 500,
+           width: 900,
+           height: 400,
            renderTo: 'chartcontainer',
            defaultSeriesType: 'line',
            marginRight: 130,
-           marginBottom: 25
+           marginBottom: 100
+           
         },
         title: {
            text: '#{@sprint.name}',
@@ -19,7 +21,7 @@
            x: -20
         },
         xAxis: {
-           categories: #{@sprint.days}
+           categories: #{@sprint.days.to_json}
         },
         yAxis: {
            title: {

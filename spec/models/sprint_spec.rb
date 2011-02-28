@@ -57,4 +57,29 @@ describe Sprint do
     
     sprint.days.should eq(expected)
   end
+  
+  it "should return total points for each day when no progress is made" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 5, :total_points => 100)
+   
+    sprint.points.should eq([100, 100, 100, 100, 100])
+  end
+  
+  it "should return total points less progress points for each day when the progress is made on the first day" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 5, :total_points => 100)
+    
+    sprint.progresses << Progress.new(:points => 10, :apply_date => sprint.days.first)
+    sprint.points.should eq([90, 90, 90, 90, 90])
+    
+  end
+  
+ it "should return total points less progress points for each progresses" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 5, :total_points => 100)
+    
+    sprint.progresses << Progress.new(:points => 15, :apply_date => sprint.days.first)
+    sprint.progresses << Progress.new(:points => 5, :apply_date => sprint.days[1])
+    sprint.progresses << Progress.new(:points => 10, :apply_date => sprint.days[2])
+    sprint.progresses << Progress.new(:points => 70, :apply_date => sprint.days.last)
+    
+    sprint.points.should eq([85, 80, 70, 70, 0])
+  end
 end
