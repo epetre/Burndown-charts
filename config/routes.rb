@@ -6,7 +6,7 @@ MyBurnDownCharts::Application.routes.draw do
     end
   end
   
-  match 'sprints/:id/graph', :controller => :sprints, :action => :graph
+  match 'sprints/:id/graph', :controller => :sprints, :action => :graph, :as => :graph
   root :to => "sprints#graph", :id => 1
   
   #match 'sprints/graph/:id' => 

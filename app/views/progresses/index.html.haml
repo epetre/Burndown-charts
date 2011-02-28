@@ -7,13 +7,15 @@
     %th
     %th
     %th 
-- @progresses.each do |progress|
-  %tr
-    %td= progress.description
-    %td= progress.points
-    %td= progress.apply_date
-    %td= link_to 'Show', [@sprint, progress]
-    %td= link_to 'Edit', [@sprint, progress]
-    %td= link_to 'Destroy', [@sprint, progress], :confirm => 'Are you sure?', :method => :delete
+  - @progresses.each do |progress|
+    %tr
+      %td= progress.description
+      %td= progress.points
+      %td= progress.apply_date
+      %td= link_to 'Show', [@sprint, progress] 
+      %td= link_to 'Edit', edit_sprint_progress_path(@sprint, progress), :action => 'edit'
+      %td= button_to 'Destroy', [@sprint, progress], :confirm => 'Are you sure?', :method => :delete
 %br/
 = link_to('New Progress', new_sprint_progress_path)
+|
+= link_to('Display the chart', graph_url(@sprint.id))

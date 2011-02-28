@@ -22,4 +22,6 @@
 
 
 <%= link_to 'Edit', edit_sprint_path(@sprint) %> |
+<%= link_to('Display the chart', graph_url(@sprint.id)) %> |
+<%= link_to('Go to progression', sprint_progresses_path(@sprint)) %> |
 <%= link_to 'Back', sprints_path %>

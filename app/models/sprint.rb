@@ -30,6 +30,13 @@ class Sprint < ActiveRecord::Base
         my_points[x] = (my_points[x] - current_points)
       end   
     end  
-    my_points
+    
+    max_index = days_progressed - 1
+    my_points[0..max_index]
   end
+  
+  def days_progressed
+    return 0 if progresses.size == 0
+    days.index(progresses.last.apply_date) + 1
+  end  
 end

@@ -51,8 +51,8 @@ class ProgressesController < ApplicationController
     
     respond_to do |format|
       if @sprint.save and @progress.save
-        format.html { redirect_to(@progress, :notice => 'Progress was successfully created.') }
-        format.xml  { render :xml => @progress, :status => :created, :location => @progress }
+        format.html { redirect_to([@sprint, @progress], :notice => 'Progress was successfully created.') }
+        format.xml  { render :xml => [@sprint, @progress], :status => :created, :location => @progress }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @progress.errors, :status => :unprocessable_entity }
@@ -85,7 +85,7 @@ class ProgressesController < ApplicationController
     @progress.destroy
 
     respond_to do |format|
-      format.html { redirect_to(progresses_url) }
+      format.html { redirect_to([@sprint, @progress]) }
       format.xml  { head :ok }
     end
   end

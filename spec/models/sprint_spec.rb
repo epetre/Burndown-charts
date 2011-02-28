@@ -64,12 +64,11 @@ describe Sprint do
     sprint.points.should eq([100, 100, 100, 100, 100])
   end
   
-  it "should return total points less progress points for each day when the progress is made on the first day" do
+  it "should return total points less progress when the progress is made on the first day" do
     sprint = Sprint.new(:start_date => Date.new, :duration => 5, :total_points => 100)
     
     sprint.progresses << Progress.new(:points => 10, :apply_date => sprint.days.first)
-    sprint.points.should eq([90, 90, 90, 90, 90])
-    
+    sprint.points.should eq([90])
   end
   
  it "should return total points less progress points for each progresses" do
@@ -81,5 +80,34 @@ describe Sprint do
     sprint.progresses << Progress.new(:points => 70, :apply_date => sprint.days.last)
     
     sprint.points.should eq([85, 80, 70, 70, 0])
+  end
+  
+  it "should never return an array bigger than days_progressed" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 5, :total_points => 100)
+    
+    sprint.progresses << Progress.new(:points => 15, :apply_date => sprint.days.first)
+    sprint.progresses << Progress.new(:points => 5, :apply_date => sprint.days[1])
+    
+    sprint.points.should eq([85, 80])
+  end
+
+  it "should return days_progression equal to 0 if there is no progress in the sprint" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 5, :total_points => 100)
+    
+    sprint.days_progressed.should eq(0)
+  end
+  it "should return the sprint duration when there is a progression with an apply_date equal to the last progression day" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 5, :total_points => 100)
+    sprint.progresses << Progress.new(:points => 70, :apply_date => sprint.days.last)
+    
+    sprint.days_progressed.should eq(sprint.duration)
+  end
+  it "should return the index of days that equals the latest apply_date of progression" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 5, :total_points => 100)
+    
+    sprint.progresses << Progress.new(:points => 5, :apply_date => sprint.days.first)
+    sprint.progresses << Progress.new(:points => 70, :apply_date => sprint.days[2])
+    
+    sprint.days_progressed.should eq(3)
   end
 end
