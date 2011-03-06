@@ -27,7 +27,7 @@ class ProgressesController < ApplicationController
   # GET /progresses/new.xml
   def new
     @sprint = Sprint.find(params[:sprint_id])
-    @progress = Progress.new
+    @progress = Progress.new()
     
     respond_to do |format|
       format.html # new.html.erb
@@ -45,17 +45,16 @@ class ProgressesController < ApplicationController
   # POST /progresses.xml
   def create
     @sprint = Sprint.find(params[:sprint_id])
-    @progress = Progress.new(params[:progress])
-    
-    @sprint.progresses << @progress
+    @progress = @sprint.progresses.build(params[:progress])
     
     respond_to do |format|
-      if @sprint.save and @progress.save
-        format.html { redirect_to([@sprint, @progress], :notice => 'Progress was successfully created.') }
+      if @sprint.save
+        format.html { redirect_to( :url => new_sprint_progress_path([@sprint, @progress]), :notice => 'Progress was successfully created.') }
         format.xml  { render :xml => [@sprint, @progress], :status => :created, :location => @progress }
       else
+        @error_messages = @sprint.errors.full_messages.concat(@progress.errors.full_messages)
         format.html { render :action => "new" }
-        format.xml  { render :xml => @progress.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @sprint.errors.concat(@progress.errors), :status => :unprocessable_entity }
       end
     end
   end
@@ -71,6 +70,7 @@ class ProgressesController < ApplicationController
         format.html { redirect_to(@progress, :notice => 'Progress was successfully updated.') }
         format.xml  { head :ok }
       else
+        @error_messages = @sprint.errors.full_messages.concat(@progress.errors.full_messages)
         format.html { render :action => "edit" }
         format.xml  { render :xml => @progress.errors, :status => :unprocessable_entity }
       end

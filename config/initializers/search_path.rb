@@ -1,0 +1,1 @@
+$: << File.expand_path(File.dirname('search_path.rb') + '/../../lib')

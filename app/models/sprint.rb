@@ -1,16 +1,25 @@
+require 'MaximumPointsValidator'
+require 'SprintDaysValidator'
+
 class Sprint < ActiveRecord::Base
-  has_many :progresses
+  has_many :progresses, :autosave => false
+  include ActiveModel::Validations
   
   validates :name, :presence => true
-  validates :start_date, :presence => true 
-  validates :total_points, :presence => true
-  validates :duration, :presence => true 
+  validates :start_date, :presence => true , :sprint_days => true
+  
+  validates :duration, :presence => true, :sprint_days => true
+  validates_numericality_of :duration, :only_integer => true, :message => "can only be whole number."
   
   validates_numericality_of :total_points, :only_integer => true, :message => "can only be whole number."
-  validates_numericality_of :duration, :only_integer => true, :message => "can only be whole number."
+  validates :total_points, :presence => true, :maximum_points => true
   validates_inclusion_of :total_points, :in => 1..1000, :message => "can only be between 1 and 1000." 
   
+  validates_associated :progresses
   def days
+    if start_date.nil? || duration.nil?
+      return []  
+    end  
     (1..duration).to_a.collect{ |x| start_date + (x - 1).day }
   end
   
@@ -36,7 +45,8 @@ class Sprint < ActiveRecord::Base
   end
   
   def days_progressed
-    return 0 if progresses.size == 0
-    days.index(progresses.last.apply_date) + 1
+    return 0 if progresses.empty?
+    (days.index(progresses.last.apply_date) || -1) + 1
   end  
+
 end

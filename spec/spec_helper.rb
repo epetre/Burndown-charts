@@ -55,5 +55,5 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
   
-  #TestNotifier.default_notifier = :snarl
+  TestNotifier.default_notifier = :snarl
 end

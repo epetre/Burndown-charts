@@ -1,4 +1,7 @@
+- toptions = "width = 600, height = 450, type = iframe, title = Nouveau commentaire, layout = dashboard" 
 #content
+  %script{ :type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" }
+  %script{ :type => "text/javascript", :src => "http://gettopup.com/releases/latest/top_up-min.js" }
   :javascript
     $(document).ready(function(){
       
@@ -8,9 +11,6 @@
            height: 400,
            renderTo: 'chartcontainer',
            defaultSeriesType: 'line',
-           marginRight: 130,
-           marginBottom: 100
-           
         },
         title: {
            text: '#{@sprint.name}',
@@ -31,12 +31,18 @@
               value: 0,
               width: 1,
               color: '#808080'
-           }]
+           }],
+           max: #{@sprint.total_points},
+           min: 0
         },
         tooltip: {
-           formatter: function() {
-                     return '<b>'+ this.series.name + '</b><br/>' + this.x + ': ' + this.y;
-           }
+          formatter: function() {
+            var completed = #{@sprint.total_points} - this.y;
+            var message = '<b>' + this.x + '</b><br/><br/> Completed ' + completed + ' points, still ' + this.y + ' points left.';
+            message += '<br />';
+            
+            return message;
+          }
         },
         legend: {
            layout: 'vertical',
@@ -74,13 +80,10 @@
           }
         },
         series: [{
-           name: 'Series',
+           name: 'Current progress',
            data: #{@sprint.points.to_json}
         }]
       });
     });
-  .left.column
-    %h2= @sprint.name
-    %p Wazaa wazaa
-  .right.column
-    #chartcontainer.test
+  #chartcontainer
+  = link_to 'Add progress', new_sprint_progress_path(@sprint), :toptions => toptions 

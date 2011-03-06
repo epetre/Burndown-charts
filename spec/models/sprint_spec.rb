@@ -1,6 +1,21 @@
 require 'spec_helper'
 
 describe Sprint do
+  it "fails validation when apply_date in progresses are not in the sprint timespan" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 3, :total_points => 15)
+    sprint.progresses << Progress.new(:points => 5, :apply_date => Date.new + 5.days)
+    
+    sprint.should have(1).error_on(:start_date)
+    sprint.should have(1).error_on(:duration)
+  end
+  it "fails validation when progresses points are higher than total points" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 3, :total_points => 10)
+    sprint.progresses << Progress.new(:points => 5, :apply_date => sprint.days.first, :sprint => sprint)
+    sprint.progresses << Progress.new(:points => 5, :apply_date => sprint.days[1], :sprint => sprint)
+    sprint.progresses << Progress.new(:points => 5, :apply_date => sprint.days.last, :sprint => sprint)
+    
+    sprint.should have(1).error_on(:total_points)
+  end
   it "fails validation with no total points (using error_on)" do
     Sprint.new.should have(3).error_on(:total_points)
   end
@@ -25,7 +40,7 @@ describe Sprint do
     Sprint.new(:total_points => 'a').should have(2).error_on(:total_points)
     Sprint.new(:total_points => 1.35).should have(1).error_on(:total_points)
     Sprint.new(:total_points => 0).should have(1).error_on(:total_points)
-    Sprint.new(:total_points => -2).should have(1).error_on(:total_points)
+    Sprint.new(:total_points => -2).should have(2).error_on(:total_points)
   end
   
   it "fails validation when name is not specified" do
