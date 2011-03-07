@@ -1,0 +1,25 @@
+%p{:id => "notice"}
+  = notice
+%p
+  %b 
+    Name: 
+  = @sprint.name
+%p  
+  %b 
+    Start date:
+  = @sprint.start_date  
+%p
+  %b
+    Duration:
+  = @sprint.duration
+%p
+  %b 
+    Total points:
+  = @sprint.total_points
+= link_to 'Edit', edit_sprint_path(@sprint) 
+|
+= link_to('Display the chart', graph_url(@sprint.id))
+|
+= link_to('Go to progression', sprint_progresses_path(@sprint)) 
+|
+= link_to 'Back', sprints_path
