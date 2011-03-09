@@ -10,13 +10,12 @@ gem 'mongrel', '>= 1.2.0.pre2'
 gem 'dispatcher'
 gem 'haml'
 
-group :test, :development do
-  gem "rspec-rails", "~> 2.5"
-  gem "webrat"
-  gem 'ZenTest', '~> 4.5'
+group :test do
+	gem "webrat"
+	gem "rspec-rails", "~> 2.5"
+	gem 'ZenTest', '~> 4.5'
   gem "autotest-rails", "~> 4.1.0"
   gem 'test_notifier'
-  gem 'spork'
 end
 # Use unicorn as the web server
 # gem 'unicorn'

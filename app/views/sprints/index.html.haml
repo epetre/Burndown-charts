@@ -15,8 +15,8 @@
     %td= sprint.duration
     %td= sprint.total_points
     %td= link_to 'Show', sprint
-    %td= link_to 'Edit', edit_sprint_path(sprint
-    = link_to 'Destroy', sprint, :confirm => 'Are you sure?', :method => :delete
+    %td= link_to 'Edit', edit_sprint_path(sprint)
+    %td= link_to('Destroy', sprint, :confirm => 'Are you sure?', :method => :delete)
 %br/
 = link_to 'New Sprint', new_sprint_path
 
