@@ -1,13 +1,16 @@
 %p{ :id=>"notice" } 
   = notice
 %p
-  %b Description:
+  %b 
+    Description:
     = @progress.description
 %p
-  %b Points:
+  %b 
+    Points:
     = @progress.points
 %p
-  %b Apply date:
+  %b 
+    Apply date:
     = @progress.apply_date
 = link_to 'Edit', edit_sprint_progress_path(@sprint.id, @progress.id) |
 = link_to 'Back', sprint_progresses_path
