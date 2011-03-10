@@ -1,4 +1,5 @@
-%h1=  "Listing progresses for #{@sprint.name}"
+- content_for :title do
+  Listing progresses for #{@sprint.name}
 %table
   %tr
     %th Description

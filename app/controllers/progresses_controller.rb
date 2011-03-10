@@ -28,7 +28,7 @@ class ProgressesController < ApplicationController
   def new
     @sprint = Sprint.find(params[:sprint_id])
     @progress = Progress.new()
-    
+    @error_messages = []
     respond_to do |format|
       format.html 
       format.xml  { render :xml => @progress }
@@ -39,6 +39,7 @@ class ProgressesController < ApplicationController
   def edit
     @sprint = Sprint.find(params[:sprint_id])
     @progress = Progress.find(params[:id])
+    @error_messages = []
   end
 
   # POST /progresses

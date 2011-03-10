@@ -79,10 +79,10 @@
             }
           }
         },
-        series: [{
-           name: 'Current progress',
-           data: #{@sprint.points.to_json}
-        }]
+        series: [
+          { name: 'Current progress', data: #{@sprint.points.to_json} },
+          { name: 'test 123', data: #{@sprint.correlated_points.to_json} }
+          ]
       });
     });
   #chartcontainer

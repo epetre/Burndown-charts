@@ -1,6 +1,30 @@
 require 'spec_helper'
 
 describe Sprint do
+  it "correlated points should use the max as the first point" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 5, :total_points => 25)
+    
+    sprint.progresses << Progress.new(:points => 13, :apply_date => sprint.start_date)
+    sprint.progresses << Progress.new(:points => 5, :apply_date => sprint.start_date + 1.day)
+    
+    sprint.correlated_points.should eq([16, 7])
+  end
+  
+  it "should should return corrlated points using min and max of points and completing the graph till the last day" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 5, :total_points => 50)
+    
+    sprint.progresses << Progress.new(:points => 5, :apply_date => sprint.start_date)
+    sprint.progresses << Progress.new(:points => 5, :apply_date => sprint.start_date + 1.days)
+    
+    sprint.correlated_points.should eq([45, 40, 35, 30, 25])
+  end
+  it "should always return correlated points with a length equal to the duration" do
+    sprint = Sprint.new(:start_date => Date.new, :duration => 5, :total_points => 50)
+    
+   
+    sprint.correlated_points.size.should eq(sprint.duration)
+  end
+  
   it "fails validation when apply_date in progresses are not in the sprint timespan" do
     sprint = Sprint.new(:start_date => Date.new, :duration => 3, :total_points => 15)
     sprint.progresses << Progress.new(:points => 5, :apply_date => Date.new + 5.days)

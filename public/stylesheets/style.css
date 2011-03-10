@@ -1,0 +1,17 @@
+.header
+{
+  height:250px;
+  border: 1px solid none;
+}
+
+.wrapper
+{
+  margin: 1em auto 0;
+  width: 943px;
+}
+
+body
+{
+  font-color: white;
+  
+}

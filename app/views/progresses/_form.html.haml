@@ -1,7 +1,7 @@
 = form_for([@sprint, @progress]) do |f|
-  - if (@progress.errors.any?)
+  - if (@error_messages.any?)
     #error_explanation
-      %h2= pluralize(@progress.errors.count, "error") + ' prohibited this progress from being saved:'
+      %h2= pluralize(@error_messages.count, "error") + ' prohibited this progress from being saved:'
       %ul
         - @error_messages.each do |msg|
           %li= msg

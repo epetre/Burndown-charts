@@ -49,4 +49,14 @@ class Sprint < ActiveRecord::Base
     (days.index(progresses.last.apply_date) || -1) + 1
   end  
 
+  def correlated_points
+    ratio = (total_points - points.last) / (points.size || 1)
+    
+    current_points = []
+    duration.times do
+      new_points = (current_points.last || total_points) - ratio
+      current_points << new_points if new_points >= 0
+    end
+    current_points
+  end  
 end
