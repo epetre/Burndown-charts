@@ -1,22 +1,17 @@
-%h1 Listing sprints
-%table
-  %tr
-    %th Name
-    %th Start date
-    %th Duration
-    %th Total points
-    %th
-    %th
-    %th
+- content_for :title do
+  Listing sprints 
+%ul
+  %li 
+    Name Start date Duration Total points
 - @sprints.each do |sprint|
-  %tr
-    %td= sprint.name 
-    %td= sprint.start_date
-    %td= sprint.duration
-    %td= sprint.total_points
-    %td= link_to 'Show', sprint
-    %td= link_to 'Edit', edit_sprint_path(sprint)
-    %td= link_to('Destroy', sprint, :confirm => 'Are you sure?', :method => :delete)
+  %li
+    = sprint.name
+    = sprint.start_date
+    = sprint.duration
+    = sprint.total_points 
+    = link_to 'Show', sprint 
+    = link_to 'Edit', edit_sprint_path(sprint)
+    = link_to('Destroy', sprint, :confirm => 'Are you sure?', :method => :delete)
 %br/
 = link_to 'New Sprint', new_sprint_path
 

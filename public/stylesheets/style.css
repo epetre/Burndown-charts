@@ -1,17 +1,36 @@
+h1
+{
+  font-size: 35px;
+  margin-bottom: 1em; 
+}
+
+li
+{
+   list-style-type:none; 
+}
+
 .header
 {
   height:250px;
-  border: 1px solid none;
+  background-color : white;
 }
 
 .wrapper
 {
-  margin: 1em auto 0;
+  margin: 4em auto 0;
   width: 943px;
 }
-
+.content
+{
+  background-color : white;
+  margin-top: 2px;
+  padding-top: 5em;
+  padding-left: 5em;
+  min-height: 400px;
+}
 body
 {
   font-color: white;
-  
+  background-image: url('/images/bg.png');
+  background-repeat: repeat;
 }
