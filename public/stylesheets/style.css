@@ -1,3 +1,11 @@
+body
+{
+  color: black;
+  
+  background-image: url('/images/bg.png');
+  background-repeat: repeat;
+}
+
 h1
 {
   font-size: 35px;
@@ -14,7 +22,10 @@ li
   height:250px;
   background-color : white;
 }
-
+.clearer
+{
+  clear: both;
+}
 .wrapper
 {
   margin: 4em auto 0;
@@ -24,13 +35,59 @@ li
 {
   background-color : white;
   margin-top: 2px;
-  padding-top: 5em;
-  padding-left: 5em;
+  padding: 5em 5em 0 5em;
   min-height: 400px;
+  
 }
-body
+
+.sprints
 {
-  font-color: white;
-  background-image: url('/images/bg.png');
-  background-repeat: repeat;
+  -moz-border-radius: 15px;
+  min-height: 120px;
+  margin-bottom:3em;
+  border: 2px solid #999999;
+  padding: 2px 2px 2px 2px;
 }
+.sprint .graph, .sprint .info, .sprint .links
+{
+  margin-top : 20px;
+}
+.sprint .graph{
+margin-left : 5em;
+ float:left;
+}
+.sprint .links, .sprint .info{
+  float:right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,18 +1,22 @@
 - content_for :title do
-  Listing sprints 
-%ul
-  %li 
-    Name Start date Duration Total points
-- @sprints.each do |sprint|
-  %li
-    = sprint.name
-    = sprint.start_date
-    = sprint.duration
-    = sprint.total_points 
-    = link_to 'Show', sprint 
-    = link_to 'Edit', edit_sprint_path(sprint)
-    = link_to('Destroy', sprint, :confirm => 'Are you sure?', :method => :delete)
-%br/
+  Listing sprints
+= javascript_include_tag 'chart_helper' 
+:javascript
+.sprints
+  - @sprints.each do |sprint|
+    .sprint
+      .graph
+        graph
+      .links
+        = link_to 'Show', graph_url(sprint)
+        = link_to 'Edit', edit_sprint_path(sprint)
+        = link_to('Destroy', sprint, :confirm => 'Are you sure?', :method => :delete)
+      .info
+        = sprint.name
+        = sprint.start_date
+        = sprint.duration
+        = sprint.total_points 
+      .clearer
 = link_to 'New Sprint', new_sprint_path
 
 

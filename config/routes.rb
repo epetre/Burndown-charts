@@ -1,5 +1,11 @@
 MyBurnDownCharts::Application.routes.draw do
   
+  devise_for :users
+
+  resources :users
+
+  resources :authentications
+
   resources :sprints do
     resources :progresses do
       
@@ -7,8 +13,8 @@ MyBurnDownCharts::Application.routes.draw do
   end
   
   match 'sprints/:id/graph', :controller => :sprints, :action => :graph, :as => :graph
-  root :to => "sprints#graph", :id => 1
-  
+  root :to => "sprints", :action => :index
+  match '/auth/:provider/callback' => 'authentications#create'
   #match 'sprints/graph/:id' => 
   # The priority is based upon order of creation:
   # first created -> highest priority.

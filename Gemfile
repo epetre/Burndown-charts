@@ -9,6 +9,8 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'mongrel', '>= 1.2.0.pre2'
 gem 'dispatcher'
 gem 'haml'
+gem 'omniauth'
+gem 'devise'
 
 group :test do
 	gem "webrat"
