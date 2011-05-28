@@ -3,12 +3,26 @@
   %head
     %title= yield :title
     = stylesheet_link_tag :all
-    %script{:type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"}
+    %script{:type => "text/javascript", :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'}
     = javascript_include_tag 'highcharts'
     = javascript_include_tag './themes/dark-blue'
     = csrf_meta_tag
   %body
     .wrapper
+      %ul.login
+        - if user_signed_in?
+          %li 
+            = link_to('Logout', destroy_user_session_path)      
+        - else 
+          %li 
+            = link_to('Login', new_user_session_path)
+        - if user_signed_in?
+          %li
+            = link_to('Edit registration', edit_user_registration_path)
+        - else 
+          %li  
+            = link_to('Sign up', new_user_registration_path) 
+      .clearer
       .header
       .content
         %h1= yield :title

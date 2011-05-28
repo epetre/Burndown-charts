@@ -17,7 +17,7 @@
     <td><%= authentication.uid %></td>
     <td><%= link_to 'Show', authentication %></td>
     <td><%= link_to 'Edit', edit_authentication_path(authentication) %></td>
-    <td><%= link_to 'Destroy', authentication, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', authentication, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

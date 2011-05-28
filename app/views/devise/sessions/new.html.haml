@@ -1,0 +1,44 @@
+:javascript
+  $(document).ready(function(){
+    var regex = /\_[0-9]+/;
+    $("ul.providers img").hover(function(){
+      this.src = this.src.replace(regex, '_128');
+    },function(){
+      this.src = this.src.replace(regex, '_64');
+    });
+    $('input[type=text]').click(function(){
+      if(this.value == 'email@world.net'){
+        this.value = '';
+      } 
+    });
+  })
+- content_for :title do 
+  LOGIN here muthafucka
+.login-page
+  %h2 
+    Use:
+  %ul.providers
+    %li
+      = link_to image_tag("twitter_64.png"), signin_path(:twitter)
+    %li
+      = link_to image_tag("facebook_64.png"), signin_path(:facebook)
+    %li
+      = link_to image_tag("google_64.png"), signin_path(:google)
+  .or
+    OR
+  - form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+    .input-fields
+      %p
+        = f.text_field :email, :value => 'email@world.net' 
+      %p
+        = f.password_field :password
+    .submit
+      = f.submit "Sign in"
+      - if devise_mapping.rememberable?
+        %p.remember-me
+          = f.check_box :remember_me 
+          = f.label :remember_me
+          %br
+          = render :partial => "devise/shared/links"
+    .clearer
+  .clearer
