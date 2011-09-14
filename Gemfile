@@ -11,6 +11,7 @@ gem 'dispatcher'
 gem 'haml'
 gem 'omniauth'
 gem 'devise'
+gem 'rake', '0.9.2'
 
 group :test do
 	gem "webrat"
@@ -18,6 +19,7 @@ group :test do
 	gem 'ZenTest', '~> 4.5'
   gem "autotest-rails", "~> 4.1.0"
   gem 'test_notifier'
+  gem 'spork', '~> 0.9.0.rc'
 end
 # Use unicorn as the web server
 # gem 'unicorn'
